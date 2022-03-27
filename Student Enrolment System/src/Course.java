@@ -1,18 +1,13 @@
 
 import java.util.ArrayList;
 
-public class Course {
+public class Course implements StudentEnrolmentManager{
     private String courseID;
     private String courseName;
     private int numberCredit;
     private ArrayList<Student> studentList;
 
-    public Course(){
-        this.courseID = "default";
-        this.courseName = "default";
-        this.numberCredit = 000;
-        this.studentList = new ArrayList<Student>();
-    }
+
 
     public Course(String courseID, String courseName, int numberCredit) {
         this.courseID = courseID;
@@ -36,4 +31,28 @@ public class Course {
     public ArrayList<Student> getStudentList() {
         return studentList;
     }
+
+    public boolean add (Student student) {
+        if (studentList.contains(student)){
+            return false;
+        }
+        studentList.add(student);
+        student.getCourseList().add(this);
+        return true;
+    }
+
+    public void delete(){
+        return;
+    }
+    public void getOne(){
+        return;
+    }
+    public void update(){
+        return;
+    }
+    public void getAll(){
+        return;
+    }
+
+
 }

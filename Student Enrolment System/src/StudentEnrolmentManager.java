@@ -1,5 +1,5 @@
 public interface StudentEnrolmentManager {
-    public void add();
+    public boolean add(Student student);
     public void update();
     public void delete();
     public void getOne();
