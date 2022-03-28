@@ -1,19 +1,12 @@
-
-import java.util.ArrayList;
-
-public class Course implements StudentEnrolmentManager{
+public class Course {
     private String courseID;
     private String courseName;
     private int numberCredit;
-    private ArrayList<Student> studentList;
-
-
 
     public Course(String courseID, String courseName, int numberCredit) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.numberCredit = numberCredit;
-        this.studentList = new ArrayList<Student>();
     }
 
     public String getCourseID() {
@@ -28,31 +21,15 @@ public class Course implements StudentEnrolmentManager{
         return numberCredit;
     }
 
-    public ArrayList<Student> getStudentList() {
-        return studentList;
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
     }
 
-    public boolean add (Student student) {
-        if (studentList.contains(student)){
-            return false;
-        }
-        studentList.add(student);
-        student.getCourseList().add(this);
-        return true;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public void delete(){
-        return;
+    public void setNumberCredit(int numberCredit) {
+        this.numberCredit = numberCredit;
     }
-    public void getOne(){
-        return;
-    }
-    public void update(){
-        return;
-    }
-    public void getAll(){
-        return;
-    }
-
-
 }
