@@ -9,22 +9,33 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
     List<Course> courseList = new ArrayList<Course>();
     List<String> semesterList = new ArrayList<String>();
 
-    public StudentEnrolmentManager(List<Student> studentList, List<Course> courseList, List<String> semesterList) {
-        this.studentList = studentList;
+    public StudentEnrolmentManager(List<Student> studentList, List<Course> courseList, List<String> semesterList, List<StudentEnrolment> studentEnrolmentList) {
+        this.studentList = FilteredStudentByID(studentList);
         this.courseList = courseList;
         this.semesterList = semesterList;
-
-        // append dummy data
-        Student s1 = new Student("s001", "Nguyen 1", "16/08/2002");
-        Student s2 = new Student("s002", "Nguyen 2", "16/08/2002");
-        Course c1 = new Course("c001", "OOP 1", "4");
-        Course c2 = new Course("c002", "OOP 2", "4");
-
-        StudentEnrolment se1 = new StudentEnrolment(s1, c1, "sem001");
-        StudentEnrolment se2 = new StudentEnrolment(s2, c2, "sem002");
-        this.studentEnrolmentList.add(se1);
-        this.studentEnrolmentList.add(se2);
+        this.studentEnrolmentList = studentEnrolmentList;
     }
+
+    public boolean isExistStudent(String studentId, List<Student> studentList) {
+        for (Student student : studentList) {
+            if (student.getId().equals(studentId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Student> FilteredStudentByID(List<Student> studentList) {
+        List<Student> emptyList = new ArrayList<Student>();
+        for (Student student : studentList) {
+            if (isExistStudent(student.getId(), emptyList) == false) {
+                emptyList.add(student);
+            }
+        }
+        return emptyList;
+    }
+
+
 
     public boolean validateStudentById(String studentId) {
         for (Student student : this.studentList) {
@@ -208,47 +219,21 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         studentEnrolmentList.add(studentEnrolment);
     }
 
-//    public void updateCourseBelongToStudentInSemester(studentId, semester) {
-//        // get all course of student in semester
-//        list<stuydentr enrolment> result;
-//        for enrolment in enrolmentList :
-//            if enrolment.getStudent.id === studentId and seester = mess
-//                result.append
-//
-//        result =[record 1 record 2];
-//
-//            ask to user delete or iupdate copurse
-//                delete
-//                // asker input course info
-//
-//                for item in result;
-//        item.setCourse
-//                enrolment.remove
-//
-//    }
-//    public void addDeleteCourseStud (String studentID, String semester) {
-//        List<StudentEnrolment> result = new ArrayList<StudentEnrolment>();
-//        for (StudentEnrolment enrolment : this.studentEnrolmentList){
-//            if (enrolment.getStudent().getId().equals(studentID) && enrolment.getSemester().equals(semester)){
-//                result.add(enrolment);
-//            }
-//
-//        }
-//    }
 
     public List<String> allCourseOfStudent() {
         Scanner allCourseStudentID = new Scanner(System.in);
         Scanner allCourseStudentSem = new Scanner(System.in);
         List<String> courseOfStud = new ArrayList<String>();
-        System.out.print("Enter the student ID");
+        System.out.print("Enter the student ID: ");
         String studentID = allCourseStudentID.nextLine();
-        System.out.print("Enter the semester");
+        System.out.print("Enter the semester: ");
         String semesterAllCourse = allCourseStudentSem.nextLine();
         for (StudentEnrolment enrolment : this.studentEnrolmentList) {
             if (enrolment.getStudent().getId().equals(studentID) && enrolment.getSemester().equals(semesterAllCourse)) {
                 courseOfStud.add(enrolment.getCourse().getCourseName());
             }
-        }return courseOfStud;
+        }
+        return courseOfStud;
     }
 
     public List<String> allStudentInCourse() {
