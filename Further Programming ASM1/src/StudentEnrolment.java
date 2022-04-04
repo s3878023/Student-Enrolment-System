@@ -8,7 +8,7 @@ public class StudentEnrolment {
         this.course = course;
         this.semester = semester;
     }
-
+    //all the get set for the student
     public Student getStudent() {
         return this.student;
     }

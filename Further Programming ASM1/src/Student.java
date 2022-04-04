@@ -12,7 +12,7 @@ public class Student {
     public String getId() {
         return id;
     }
-
+        //all the get set for the student
     public String getName() {
         return name;
     }

@@ -17,8 +17,8 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         // append dummy data
         Student s1 = new Student("s001", "Nguyen 1", "16/08/2002");
         Student s2 = new Student("s002", "Nguyen 2", "16/08/2002");
-        Course c1 = new Course("c001", "OOP 1", 4);
-        Course c2 = new Course("c002", "OOP 2", 4);
+        Course c1 = new Course("c001", "OOP 1", "4");
+        Course c2 = new Course("c002", "OOP 2", "4");
 
         StudentEnrolment se1 = new StudentEnrolment(s1, c1, "sem001");
         StudentEnrolment se2 = new StudentEnrolment(s2, c2, "sem002");
@@ -197,7 +197,7 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         String courseName = courseNameInput.nextLine();
 
         System.out.print("Please enter the number of credit: ");
-        int creditNumber = creditInput.nextInt();
+        String creditNumber = creditInput.nextLine();
 
         System.out.print("Please choose your semester that you want to enroll: ");
         String enrollSemester = enrollSemesterInput.nextLine();
@@ -226,38 +226,58 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
 //                enrolment.remove
 //
 //    }
-    public void addDeleteCourseStud (String studentID, String semester) {
-        List<StudentEnrolment> result = new ArrayList<StudentEnrolment>();
-        for (StudentEnrolment enrolment : this.studentEnrolmentList){
-            if (enrolment.getStudent().getId().equals(studentID) && enrolment.getSemester().equals(semester)){
-                result.add(enrolment);
-            }
+//    public void addDeleteCourseStud (String studentID, String semester) {
+//        List<StudentEnrolment> result = new ArrayList<StudentEnrolment>();
+//        for (StudentEnrolment enrolment : this.studentEnrolmentList){
+//            if (enrolment.getStudent().getId().equals(studentID) && enrolment.getSemester().equals(semester)){
+//                result.add(enrolment);
+//            }
+//
+//        }
+//    }
 
-        }
-    }
-
-    public void allCourseOfStudent () {
+    public List<String> allCourseOfStudent() {
         Scanner allCourseStudentID = new Scanner(System.in);
         Scanner allCourseStudentSem = new Scanner(System.in);
+        List<String> courseOfStud = new ArrayList<String>();
         System.out.print("Enter the student ID");
         String studentID = allCourseStudentID.nextLine();
         System.out.print("Enter the semester");
         String semesterAllCourse = allCourseStudentSem.nextLine();
         for (StudentEnrolment enrolment : this.studentEnrolmentList) {
             if (enrolment.getStudent().getId().equals(studentID) && enrolment.getSemester().equals(semesterAllCourse)) {
-                System.out.println("All the course of the student in the semester: ");
-                System.out.println(enrolment.getCourse().getCourseName());
+                courseOfStud.add(enrolment.getCourse().getCourseName());
             }
-        }
+        }return courseOfStud;
     }
 
-    public void allStudentInCourse (String courseID, String semester) {
+    public List<String> allStudentInCourse() {
+        Scanner AllStudentCourseID = new Scanner(System.in);
+        Scanner allStudSem = new Scanner(System.in);
+        List<String> studInCourse = new ArrayList<String>();
+        System.out.print("Enter the CourseID: ");
+        String courseID = AllStudentCourseID.nextLine();
+        System.out.print("Enter the Semester: ");
+        String semester = allStudSem.nextLine();
          for (StudentEnrolment enrolment : this.studentEnrolmentList) {
              if (enrolment.getCourse().getCourseID().equals(courseID) && enrolment.getSemester().equals(semester)) {
-                 System.out.println("All the student in this course: ");
-                 System.out.println(enrolment.getStudent().getName());
+                 studInCourse.add(enrolment.getStudent().getName());
              }
          }
+         return studInCourse;
+    }
+
+    public List<String> allCourseOneSem() {
+        Scanner chooseSem = new Scanner(System.in);
+        List<String> courseinOneSem = new ArrayList<String>();
+        System.out.print("Enter the semester: ");
+        String semChoice = chooseSem.nextLine();
+        for (StudentEnrolment enrolment : this.studentEnrolmentList) {
+            if (enrolment.getSemester().equals(semChoice)){
+                courseinOneSem.add(enrolment.getCourse().getCourseName());
+            }
+        }
+        return courseinOneSem;
     }
 
 
