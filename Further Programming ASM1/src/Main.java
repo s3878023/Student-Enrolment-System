@@ -11,7 +11,21 @@ class Main {
 //    public
 
     public static void main(String[] args) {
-        List<String> container = CSVManager.read("./default.csv");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please input an option: 1 (Input file) 2 (Default file)");
+        String response = in.nextLine();
+        String fileName = "";
+        if (response.equals("1")) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Please input the file name");
+            String newsc = sc.nextLine();
+            newsc = fileName;
+        }
+        if (response.equals("2")){
+            fileName = "default";
+        }
+
+        List<String> container = CSVManager.read("./" + fileName + ".csv");
         List<Course> courseList = new ArrayList<Course>();
         List<String> semesterList = new ArrayList<String>();
         List<Student> studentList = new ArrayList<Student>();
@@ -36,13 +50,17 @@ class Main {
 
         }
 
+
         StudentEnrolmentManager manager = new StudentEnrolmentManager(studentList, courseList, semesterList, studentEnrolmentList);
-        for (Student item : manager.studentList) {
-            System.out.println(item.getId());
-        }
+//        for (Student item : manager.studentList) {
+//            System.out.println(item.getId());
+//        }
+//        for (Course item : manager.courseList) {
+//            System.out.println(item.getCourseName());
+//        }
         Scanner askScanner = new Scanner(System.in);
         while (true) {
-            System.out.println("Menu");
+            System.out.println("\nMenu");
             System.out.println("1. ADD Student Enrolment");
             System.out.println("2. UPDATE Student Enrolment");
             System.out.println("3. DELETE Student Enrolment");
@@ -83,9 +101,6 @@ class Main {
                 case 6:
                     System.out.println(">> PRINT ALL COURSE OF ONE STUDENT ONE SEMESTER <<");
                     List<String> courseOfStud = manager.allCourseOfStudent();
-                    for (String item : courseOfStud) {
-                        System.out.println(item);
-                    }
                     CSVManager.write("./result.csv", courseOfStud);
                     break;
                 case 7:

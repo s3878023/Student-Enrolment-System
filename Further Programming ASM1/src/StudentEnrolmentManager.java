@@ -11,11 +11,34 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
 
     public StudentEnrolmentManager(List<Student> studentList, List<Course> courseList, List<String> semesterList, List<StudentEnrolment> studentEnrolmentList) {
         this.studentList = FilteredStudentByID(studentList);
-        this.courseList = courseList;
+        this.courseList = FilteredCourseByID(courseList);
         this.semesterList = semesterList;
         this.studentEnrolmentList = studentEnrolmentList;
     }
 
+    //boolean fucntion to check if the course is existed in the list//
+    public boolean isExistedCourse(String courseID, List<Course> courseList){
+        for (Course course : courseList) {
+            if (course.getCourseID().equals(courseID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //filter the course that is duplicated in the list imported in the CSV//
+    public List<Course> FilteredCourseByID(List<Course> courseList) {
+        List<Course> emptyList = new ArrayList<Course>();
+        for (Course course : courseList) {
+            if (isExistedCourse(course.getCourseID(), emptyList) == false){
+                emptyList.add(course);
+            }
+        }
+        return emptyList;
+
+    }
+
+    //boolean fucntion to check if the Student is existed in the list import from CSV//
     public boolean isExistStudent(String studentId, List<Student> studentList) {
         for (Student student : studentList) {
             if (student.getId().equals(studentId)) {
@@ -24,7 +47,7 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         }
         return false;
     }
-
+    //Function to sort out the duplicated student has appeared in the list//
     public List<Student> FilteredStudentByID(List<Student> studentList) {
         List<Student> emptyList = new ArrayList<Student>();
         for (Student student : studentList) {
@@ -37,6 +60,7 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
 
 
 
+    //funct to validate the student by ID
     public boolean validateStudentById(String studentId) {
         for (Student student : this.studentList) {
             if (student.getId().equals(studentId)) {
