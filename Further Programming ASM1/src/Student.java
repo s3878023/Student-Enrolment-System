@@ -8,10 +8,12 @@ public class Student {
         this.name = name;
         this.birthDate = birthDate;
     }
+
     //all the getter setter for the student
     public String getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }

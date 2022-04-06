@@ -21,7 +21,7 @@ class Main {
             fileName = newsc;
             System.out.println(fileName);
         }
-        if (response.equals("2")){
+        if (response.equals("2")) {
             fileName = "default";
         }
         //create the list to contain//

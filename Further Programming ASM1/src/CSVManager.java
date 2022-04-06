@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class CSVManager {
     public static String DELIMITER = ",";
+
     //Function to read the CSV file//
     public static List<String> read(String path) {
         List<String> values = new ArrayList<String>();

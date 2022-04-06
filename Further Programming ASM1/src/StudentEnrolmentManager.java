@@ -17,7 +17,7 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
     }
 
     //boolean fucntion to check if the course is existed in the Courselist//
-    public boolean isExistedCourse(String courseID, List<Course> courseList){
+    public boolean isExistedCourse(String courseID, List<Course> courseList) {
         for (Course course : courseList) {
             if (course.getCourseID().equals(courseID)) {
                 return true;
@@ -30,12 +30,11 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
     public List<Course> FilteredCourseByID(List<Course> courseList) {
         List<Course> emptyList = new ArrayList<Course>();
         for (Course course : courseList) {
-            if (isExistedCourse(course.getCourseID(), emptyList) == false){
+            if (isExistedCourse(course.getCourseID(), emptyList) == false) {
                 emptyList.add(course);
             }
         }
         return emptyList;
-
     }
 
     //boolean fucntion to check if the Student is existed in the list import from CSV//
@@ -47,6 +46,7 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         }
         return false;
     }
+
     //Function to sort out the duplicated student has appeared in the list//
     public List<Student> FilteredStudentByID(List<Student> studentList) {
         List<Student> emptyList = new ArrayList<Student>();
@@ -57,8 +57,6 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         }
         return emptyList;
     }
-
-
 
     //funct to validate the student by ID
     public boolean validateStudentById(String studentId) {
@@ -96,8 +94,6 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         }
         return null;
     }
-
-//    public Student getStudent
 
     public Course getCourseByID(String courseID) {
         for (Course course : courseList) {
@@ -170,12 +166,14 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         return this.studentEnrolmentList;
     }
 
+    //print all function
     public void printAll() {
         for (StudentEnrolment item : this.studentEnrolmentList) {
             item.printInfo();
         }
     }
 
+    //Get the student enrolment info from users//
     public StudentEnrolment getStudentEnrolmentFromUserInput() {
         while (true) {
             Scanner curStudentIdScanner = new Scanner(System.in);
@@ -206,6 +204,8 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         }
     }
 
+
+    //add function//
     @Override
     public void add() {
         Scanner studentInputID = new Scanner(System.in);
@@ -243,7 +243,7 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         studentEnrolmentList.add(studentEnrolment);
     }
 
-
+    //Print out all course of one student in one semester//
     public List<String> allCourseOfStudent() {
         Scanner allCourseStudentID = new Scanner(System.in);
         Scanner allCourseStudentSem = new Scanner(System.in);
@@ -261,6 +261,7 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         return courseOfStud;
     }
 
+    //print out all of the students in one course in one semester//
     public List<String> allStudentInCourse() {
         Scanner AllStudentCourseID = new Scanner(System.in);
         Scanner allStudSem = new Scanner(System.in);
@@ -269,15 +270,16 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         String courseID = AllStudentCourseID.nextLine();
         System.out.print("Enter the Semester: ");
         String semester = allStudSem.nextLine();
-         for (StudentEnrolment enrolment : this.studentEnrolmentList) {
-             if (enrolment.getCourse().getCourseID().equals(courseID) && enrolment.getSemester().equals(semester)) {
-                 studInCourse.add(enrolment.getStudent().getName());
-                 studInCourse.add(enrolment.getStudent().getId());
-             }
-         }
-         return studInCourse;
+        for (StudentEnrolment enrolment : this.studentEnrolmentList) {
+            if (enrolment.getCourse().getCourseID().equals(courseID) && enrolment.getSemester().equals(semester)) {
+                studInCourse.add(enrolment.getStudent().getName());
+                studInCourse.add(enrolment.getStudent().getId());
+            }
+        }
+        return studInCourse;
     }
 
+    //Print out all course of one semester//
     public List<String> allCourseOneSem() {
         Scanner chooseSem = new Scanner(System.in);
         List<String> courseinOneSem = new ArrayList<String>();
@@ -285,19 +287,18 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         System.out.print("Enter the semester: ");
         String semChoice = chooseSem.nextLine();
         for (StudentEnrolment enrolment : this.studentEnrolmentList) {
-            if (enrolment.getSemester().equals(semChoice)){
+            if (enrolment.getSemester().equals(semChoice)) {
                 courseinOneSem.add(enrolment.getCourse().getCourseName());
                 courseinOneSem.add(enrolment.getCourse().getCourseID());
             }
         }
         for (String element : courseinOneSem) {
-            if (!sortCourseOneSem.contains(element)){
+            if (!sortCourseOneSem.contains(element)) {
                 sortCourseOneSem.add(element);
             }
         }
         return sortCourseOneSem;
     }
-
 
 
     @Override
