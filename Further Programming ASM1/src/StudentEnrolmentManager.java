@@ -16,7 +16,7 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         this.studentEnrolmentList = studentEnrolmentList;
     }
 
-    //boolean fucntion to check if the course is existed in the list//
+    //boolean fucntion to check if the course is existed in the Courselist//
     public boolean isExistedCourse(String courseID, List<Course> courseList){
         for (Course course : courseList) {
             if (course.getCourseID().equals(courseID)) {
@@ -255,6 +255,7 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
         for (StudentEnrolment enrolment : this.studentEnrolmentList) {
             if (enrolment.getStudent().getId().equals(studentID) && enrolment.getSemester().equals(semesterAllCourse)) {
                 courseOfStud.add(enrolment.getCourse().getCourseName());
+                courseOfStud.add(enrolment.getCourse().getCourseID());
             }
         }
         return courseOfStud;
@@ -271,6 +272,7 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
          for (StudentEnrolment enrolment : this.studentEnrolmentList) {
              if (enrolment.getCourse().getCourseID().equals(courseID) && enrolment.getSemester().equals(semester)) {
                  studInCourse.add(enrolment.getStudent().getName());
+                 studInCourse.add(enrolment.getStudent().getId());
              }
          }
          return studInCourse;
@@ -279,14 +281,21 @@ public class StudentEnrolmentManager implements IStudentEnrolmentManager {
     public List<String> allCourseOneSem() {
         Scanner chooseSem = new Scanner(System.in);
         List<String> courseinOneSem = new ArrayList<String>();
+        List<String> sortCourseOneSem = new ArrayList<String>();
         System.out.print("Enter the semester: ");
         String semChoice = chooseSem.nextLine();
         for (StudentEnrolment enrolment : this.studentEnrolmentList) {
             if (enrolment.getSemester().equals(semChoice)){
                 courseinOneSem.add(enrolment.getCourse().getCourseName());
+                courseinOneSem.add(enrolment.getCourse().getCourseID());
             }
         }
-        return courseinOneSem;
+        for (String element : courseinOneSem) {
+            if (!sortCourseOneSem.contains(element)){
+                sortCourseOneSem.add(element);
+            }
+        }
+        return sortCourseOneSem;
     }
 
 

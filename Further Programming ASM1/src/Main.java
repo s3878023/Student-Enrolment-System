@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 class Main {
 
-//    public
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         //Ask the user to choose the file or automatically choose the default file for them//
