@@ -9,6 +9,7 @@ public class Course {
         this.numberCredit = numberCredit;
     }
 
+    // getter and setter of Course//
     public String getCourseID() {
         return courseID;
     }

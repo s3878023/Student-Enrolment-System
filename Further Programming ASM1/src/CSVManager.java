@@ -7,9 +7,8 @@ import java.util.Scanner;
 
 
 public class CSVManager {
-
     public static String DELIMITER = ",";
-
+    //Function to read the CSV file//
     public static List<String> read(String path) {
         List<String> values = new ArrayList<String>();
         try {
@@ -27,6 +26,7 @@ public class CSVManager {
         return values;
     }
 
+    //function to write the data to the CSV//
     public static void write(String path, List<String> data) {
         try (PrintWriter writer = new PrintWriter(path)) {
             StringBuilder sb = new StringBuilder();
